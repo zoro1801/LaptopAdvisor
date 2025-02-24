@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Input Form - {{ model_name }}</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            max-width: 550px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary {
+            background: #007bff;
+            border: none;
+            transition: background 0.3s, transform 0.2s;
+            border-radius: 8px;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-size: 0.875rem;
+            display: none;
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+
+    <script>
+        function validateForm(event) {
+            let isValid = true;
+
+            let age = document.getElementById("age");
+            let income = document.getElementById("income");
+            let credit_score = document.getElementById("credit_score");
+            let employment_status = document.getElementById("employment_status");
+            let education_level = document.getElementById("education_level");
+            let savings = document.getElementById("savings");
+
+            let errorMsgs = document.querySelectorAll(".error");
+            errorMsgs.forEach(err => err.style.display = "none");
+
+            if (age.value < 18 || age.value > 100) {
+                document.getElementById("ageError").style.display = "block";
+                isValid = false;
+            }
+            if (income.value < 0 || income.value === "") {
+                document.getElementById("incomeError").style.display = "block";
+                isValid = false;
+            }
+            if (credit_score.value < 300 || credit_score.value > 850) {
+                document.getElementById("creditScoreError").style.display = "block";
+                isValid = false;
+            }
+            if (employment_status.value === "") {
+                document.getElementById("employmentError").style.display = "block";
+                isValid = false;
+            }
+            if (education_level.value === "") {
+                document.getElementById("educationError").style.display = "block";
+                isValid = false;
+            }
+            if (savings.value < 0 || savings.value === "") {
+                document.getElementById("savingsError").style.display = "block";
+                isValid = false;
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="form-container">
+            <h3 class="text-center mb-4 text-primary">Enter Your Details</h3>
+            <form method="POST" action="{% url 'predict' %}" onsubmit="validateForm(event)">
+                {% csrf_token %}
+                <input type="hidden" name="model_name" value="{{ model_name }}">
+
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age:</label>
+                    <input type="number" name="age" id="age" class="form-control" required>
+                    <small class="error" id="ageError">Age must be between 18 and 100.</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="income" class="form-label">Monthly Income ($):</label>
+                    <input type="number" name="income" id="income" class="form-control" required>
+                    <small class="error" id="incomeError">Income cannot be negative.</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="credit_score" class="form-label">Credit Score:</label>
+                    <input type="number" name="credit_score" id="credit_score" class="form-control" required>
+                    <small class="error" id="creditScoreError">Credit Score must be between 300 and 850.</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="employment_status" class="form-label">Employment Status:</label>
+                    <select name="employment_status" id="employment_status" class="form-control" required>
+                        <option value="">Select...</option>
+                        <option value="employed">Employed</option>
+                        <option value="unemployed">Unemployed</option>
+                        <option value="student">Student</option>
+                        <option value="retired">Retired</option>
+                    </select>
+                    <small class="error" id="employmentError">Please select an Employment Status.</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="education_level" class="form-label">Education Level:</label>
+                    <select name="education_level" id="education_level" class="form-control" required>
+                        <option value="">Select...</option>
+                        <option value="high school">High School</option>
+                        <option value="bachelor">Bachelor</option>
+                        <option value="master">Master</option>
+                        <option value="doctorate">Doctorate</option>
+                    </select>
+                    <small class="error" id="educationError">Please select an Education Level.</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="savings" class="form-label">Savings ($):</label>
+                    <input type="number" name="savings" id="savings" class="form-control" required>
+                    <small class="error" id="savingsError">Savings cannot be negative.</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Check Eligibility</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
