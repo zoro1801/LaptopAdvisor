@@ -26,10 +26,9 @@ SECRET_KEY = 'django-insecure-&mcpr0w$4&z(@vg85d(e)8ikd-r&sd-+l5&$-=qj^t_3k261+p
 DEBUG = True
 
 
-<<<<<<< HEAD
-=======
+
 ALLOWED_HOSTS = ['laptopadvisor.onrender.com', '127.0.0.1', 'localhost']
->>>>>>> 34d92a94bc4b63e5c80d72a0a867afa01c0c2353
+
 
 # Application definition
 

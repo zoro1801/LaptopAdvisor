@@ -56,6 +56,7 @@ class TestModelsE2E(unittest.TestCase):
                     model_link = WebDriverWait(driver, 10).until(
                         EC.element_to_be_clickable((By.LINK_TEXT, link_text))
                     )
+                    time.sleep(2)
                     model_link.click()
 
                     # 4. Wait for the input form page to load.
@@ -87,6 +88,7 @@ class TestModelsE2E(unittest.TestCase):
                     driver.find_element(By.ID, "savings").send_keys(self.test_data[outcome]["savings"])
 
                     # 6. Submit the form
+                    time.sleep(2)
                     driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
 
                     # 7. Wait for the result page to load
@@ -101,7 +103,7 @@ class TestModelsE2E(unittest.TestCase):
                                   f"Model {model} expected '{expected_text}' but not found in the response.")
 
                     # Optional: pause briefly for observation (remove in CI)
-                    time.sleep(1)
+                    time.sleep(2)
 
                     # Return to home page for next test iteration
                     driver.get(self.base_url + "/")
