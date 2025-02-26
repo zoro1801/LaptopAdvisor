@@ -95,7 +95,7 @@
 <body>
     <div class="container py-5">
         <div class="form-container">
-            <h3 class="text-center mb-4 text-primary">Enter Your Details</h3>
+            <h3 class="text-center mb-4 text-primary">Enter Your Details for {{ model_name }}</h3>
             <form method="POST" action="{% url 'predict' %}" onsubmit="validateForm(event)">
                 {% csrf_token %}
                 <input type="hidden" name="model_name" value="{{ model_name }}">
