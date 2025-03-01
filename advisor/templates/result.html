@@ -43,7 +43,6 @@
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
-            gap: 20px;
         }
         .shop-links a {
             display: flex;
@@ -55,12 +54,12 @@
             transition: transform 0.3s ease;
         }
         .shop-links a img {
-            width: 150px; /* Set uniform width */
-            height: 100px; /* Set uniform height */
-            object-fit: contain; /* Fit image inside without stretching */
-            border: 1px solid #ddd; /* Optional: Add a light border */
-            padding: 5px; /* Optional: Add some spacing inside */
-            background: white; /* Optional: Ensure a uniform background */
+            width: 150px;
+            height: 100px;
+            object-fit: contain;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background: white;
         }
         .shop-links a:hover {
             transform: scale(1.1);
@@ -70,6 +69,11 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #555;
         }
     </style>
 </head>
@@ -107,6 +111,15 @@
         {% endif %}
 
         <a href="{% url 'home' %}" class="btn btn-secondary btn-custom mt-3">Back to Home</a>
+
+        <div class="footer mt-4">
+            <p><strong>Created by Group 2</strong></p>
+            <p>Members and their roll numbers:</p>
+            <p>KSMSCIT007 - Dhanraj Chinta</p>
+            <p>KSMSCIT011 - Daniel Injeti</p>
+            <p>KSMSCIT022 - Manisha Panigrahy</p>
+            <p>KSMSCIT039 - Mitali Vishwekar</p>
+        </div>
     </div>
 </div>
 </body>
